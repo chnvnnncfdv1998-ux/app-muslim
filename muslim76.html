@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق مسلم الشباني - مدونة التطبيق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF9800;
+            --primary-dark: #F57C00;
+            --primary-light: #FFE0B2;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333333;
+            --text-color: #424242;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--white);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-icon i {
+            font-size: 40px;
+            color: var(--primary-color);
+        }
+
+        .app-info h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-info p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .app-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            color: var(--primary-dark);
+            border-right: 5px solid var(--primary-color);
+            padding-right: 15px;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+        }
+
+        .description {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            background-color: var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .feature:hover i {
+            color: var(--white);
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to right, var(--primary-light), var(--white));
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3);
+            margin-top: 1.5rem;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.4);
+        }
+
+        .download-btn i {
+            margin-left: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* تصميم النقاط الثلاثية في الزاوية */
+        .dots-menu {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .dots-container {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dots-container:hover {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            transform: scale(1.1);
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--primary-dark);
+            border-radius: 50%;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        .dots-container:hover .dot {
+            background-color: var(--primary-color);
+        }
+
+        .edit-section {
+            background-color: var(--light-gray);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .edit-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .update-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .update-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd;
+            color: var(--dark-gray);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* تصميم القائمة المنبثقة */
+        .admin-menu {
+            position: fixed;
+            top: 60px;
+            left: 15px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            min-width: 180px;
+            display: none;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--dark-gray);
+            text-decoration: none;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-item.logout {
+            color: #d32f2f;
+        }
+
+        .menu-item.logout:hover {
+            background-color: #ffebee;
+        }
+
+        /* تنبيه تحميل */
+        .download-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            text-align: center;
+            display: none;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .download-alert h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .download-alert p {
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .alert-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .alert-btn.confirm {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .alert-btn.cancel {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .alert-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .app-info h1 {
+                font-size: 1.8rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .dots-menu {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .dots-container {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .admin-menu {
+                top: 50px;
+                left: 10px;
+                min-width: 160px;
+            }
+            
+            .alert-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- قائمة النقاط الثلاثية -->
+    <div class="dots-menu" id="dotsMenu">
+        <div class="dots-container">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- القائمة المنبثقة -->
+    <div class="admin-menu" id="adminMenu">
+        <div class="menu-item" id="editAppItem">
+            <i class="fas fa-edit"></i>
+            <span>تعديل التطبيق</span>
+        </div>
+        <div class="menu-item" id="viewStatsItem">
+            <i class="fas fa-chart-bar"></i>
+            <span>إحصائيات التحميل</span>
+        </div>
+        <div class="menu-item logout" id="logoutItem">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>تسجيل الخروج</span>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الدخول -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-box">
+            <h3>تسجيل دخول المسؤول</h3>
+            <p>للدخول إلى لوحة التحكم، يرجى إدخال كلمة المرور</p>
+            <input type="password" id="adminPassword" placeholder="كلمة المرور">
+            <button class="login-btn" id="loginBtn">دخول</button>
+            <div class="error-message" id="loginError">كلمة المرور غير صحيحة!</div>
+        </div>
+    </div>
+
+    <!-- تنبيه تحميل -->
+    <div class="download-alert" id="downloadAlert">
+        <h3>تحميل التطبيق</h3>
+        <p>سيتم توجيهك إلى صفحة تحميل التطبيق. هل تريد المتابعة؟</p>
+        <div class="alert-buttons">
+            <button class="alert-btn confirm" id="confirmDownload">نعم، التحميل الآن</button>
+            <button class="alert-btn cancel" id="cancelDownload">إلغاء</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <div class="app-icon" id="appIcon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="app-info">
+                <h1 id="appName">تطبيق مسلم الشباني</h1>
+                <p id="appTagline">تطبيق مميز يجمع بين الجمال والوظائف المفيدة</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="app-card">
+            <h2 class="section-title">عن التطبيق</h2>
+            <p class="description" id="appDescription">
+                تطبيق رائع ومميز صمم خصيصاً لتلبية احتياجات المستخدمين العرب. يتميز بواجهة جميلة بلون البرتقالي والأبيض التي تجمع بين الأناقة والبساطة. يحتوي التطبيق على العديد من المميزات التي تجعل تجربة المستخدم فريدة وسلسة.
+            </p>
+            
+            <h2 class="section-title">مميزات التطبيق</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-palette"></i>
+                    <h3>تصميم جذاب</h3>
+                    <p>واجهة مستخدم جميلة ومريحة للعين بألوان البرتقالي والأبيض</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <h3>أداء سريع</h3>
+                    <p>سرعة في التصفح والأداء مع تجربة مستخدم سلسة</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>آمن وحماية</h3>
+                    <p>حماية عالية لبياناتك وخصوصيتك</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>تحديثات مستمرة</h3>
+                    <p>تطوير وتحسين مستمر لإضافة المميزات الجديدة</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2 class="section-title">حمل التطبيق الآن</h2>
+            <p>انضم إلى آلاف المستخدمين الذين يستمتعون بتجربة تطبيقنا المميز</p>
+            
+            <div class="app-info-card" style="margin: 2rem 0; padding: 1.5rem; background: white; border-radius: 15px;">
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <div id="dynamicIcon" style="width: 60px; height: 60px; background-color: #FF9800; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-left: 15px;">
+                        <i class="fas fa-mobile-alt" style="font-size: 30px; color: white;"></i>
+                    </div>
+                    <div>
+                        <h3 id="dynamicAppName">تطبيق مسلم الشباني</h3>
+                        <p id="dynamicAppTagline">تطبيق مميز بلون البرتقالي والأبيض</p>
+                    </div>
+                </div>
+                <p id="dynamicDescription">تطبيق رائع ومميز صمم خصيصاً لتلبية احتياجات المستخدمين العرب. يتميز بواجهة جميلة بلون البرتقالي والأبيض.</p>
+            </div>
+            
+            <a href="#" class="download-btn" id="downloadLink">
+                <i class="fas fa-download"></i>
+                <span>تحميل التطبيق</span>
+            </a>
+            
+            <div style="margin-top: 1.5rem; color: #666; font-size: 0.9rem; background: rgba(255, 255, 255, 0.7); padding: 0.8rem; border-radius: 10px;">
+                <i class="fas fa-chart-line"></i>
+                <span>عدد مرات التحميل: </span>
+                <span id="downloadCount">0</span>
+            </div>
+        </div>
+
+        <!-- قسم التعديل (يظهر فقط للمسؤول بعد تسجيل الدخول) -->
+        <div class="app-card" id="adminSection">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 class="section-title">لوحة تحكم المسؤول</h2>
+                <button id="closeAdminBtn" style="background: none; border: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>يمكنك هنا تعديل معلومات التطبيق وعرضها مباشرة في الصفحة</p>
+            
+            <div class="edit-section" id="editSection">
+                <form class="edit-form" id="appEditForm">
+                    <div class="form-group">
+                        <label for="iconCode">كود الأيقونة (Font Awesome)</label>
+                        <input type="text" id="iconCode" value="fas fa-mobile-alt" placeholder="مثال: fas fa-mobile-alt">
+                        <small>أدخل كود أيقونة من Font Awesome</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appNameInput">اسم التطبيق</label>
+                        <input type="text" id="appNameInput" value="تطبيق مسلم الشباني" placeholder="أدخل اسم التطبيق">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appTaglineInput">وصف قصير</label>
+                        <input type="text" id="appTaglineInput" value="تطبيق مميز يجمع بين الجمال والوظائف المفيدة" placeholder="أدخل وصف قصير">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appDescriptionInput">وصف التطبيق</label>
+                        <textarea id="appDescriptionInput" placeholder="أدخل وصف التطبيق">تطبيق رائع ومميز صمم خصيصاً لتلبية احتياجات المستخدمين العرب. يتميز بواجهة جميلة بلون البرتقالي والأبيض التي تجمع بين الأناقة والبساطة.</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appLinkInput">رابط التطبيق للتحميل</label>
+                        <input type="url" id="appLinkInput" value="https://example.com/download" placeholder="أدخل رابط تحميل التطبيق">
+                    </div>
+                    
+                    <button type="button" class="update-btn" id="updateBtn">تحديث التطبيق</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© <span id="currentYear">2023</span> تطبيق مسلم الشباني. جميع الحقوق محفوظة.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // كلمة المرور الافتراضية للمسؤول (يمكنك تغييرها)
+            const ADMIN_PASSWORD = "admin123";
+            
+            // عناصر DOM التي سنقوم بتعديلها
+            const appNameElement = document.getElementById('appName');
+            const appTaglineElement = document.getElementById('appTagline');
+            const appDescriptionElement = document.getElementById('appDescription');
+            const dynamicAppName = document.getElementById('dynamicAppName');
+            const dynamicAppTagline = document.getElementById('dynamicAppTagline');
+            const dynamicDescription = document.getElementById('dynamicDescription');
+            const dynamicIcon = document.getElementById('dynamicIcon');
+            const downloadLink = document.getElementById('downloadLink');
+            const downloadCountElement = document.getElementById('downloadCount');
+            const currentYearElement = document.getElementById('currentYear');
+            const downloadAlert = document.getElementById('downloadAlert');
+            const confirmDownloadBtn = document.getElementById('confirmDownload');
+            const cancelDownloadBtn = document.getElementById('cancelDownload');
+            
+            // عناصر القائمة والنقاط
+            const dotsMenu = document.getElementById('dotsMenu');
+            const adminMenu = document.getElementById('adminMenu');
+            const loginModal = document.getElementById('loginModal');
+            const adminPasswordInput = document.getElementById('adminPassword');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginError = document.getElementById('loginError');
+            const adminSection = document.getElementById('adminSection');
+            const editAppItem = document.getElementById('editAppItem');
+            const viewStatsItem = document.getElementById('viewStatsItem');
+            const logoutItem = document.getElementById('logoutItem');
+            const closeAdminBtn = document.getElementById('closeAdminBtn');
+            
+            // عناصر نموذج التعديل
+            const iconCodeInput = document.getElementById('iconCode');
+            const appNameInput = document.getElementById('appNameInput');
+            const appTaglineInput = document.getElementById('appTaglineInput');
+            const appDescriptionInput = document.getElementById('appDescriptionInput');
+            const appLinkInput = document.getElementById('appLinkInput');
+            const updateBtn = document.getElementById('updateBtn');
+            
+            // متغيرات التحكم
+            let isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            let downloadCount = parseInt(localStorage.getItem('downloadCount')) || 0;
+            let currentDownloadUrl = '';
+            
+            // تهيئة الصفحة
+            function initializePage() {
+                // تحديث السنة الحالية
+                currentYearElement.textContent = new Date().getFullYear();
+                
+                // تحميل البيانات المحفوظة
+                loadAppData();
+                
+                // تحديث عداد التحميلات
+                downloadCountElement.textContent = downloadCount;
+                
+                // إخفاء قسم لوحة التحكم في البداية
+                adminSection.style.display = 'none';
+                
+                // التحكم في ظهور النقاط الثلاثية
+                dotsMenu.style.display = 'block';
+            }
+            
+            // عند النقر على النقاط الثلاثية
+            dotsMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                if (!isLoggedIn) {
+                    // إذا لم يكن مسجل دخول، عرض نافذة التسجيل
+                    loginModal.style.display = 'flex';
+                } else {
+                    // إذا كان مسجل دخول، إظهار القائمة المنبثقة
+                    adminMenu.style.display = 'block';
+                    positionMenu();
+                }
+            });
+            
+            // تحديد موقع القائمة المنبثقة
+            function positionMenu() {
+                const dotsRect = dotsMenu.getBoundingClientRect();
+                adminMenu.style.top = (dotsRect.bottom + 5) + 'px';
+                adminMenu.style.left = dotsRect.left + 'px';
+            }
+            
+            // إغلاق القائمة عند النقر خارجها
+            document.addEventListener('click', function(e) {
+                if (!dotsMenu.contains(e.target) && !adminMenu.contains(e.target)) {
+                    adminMenu.style.display = 'none';
+                }
+            });
+            
+            // معالج حدث زر الدخول
+            loginBtn.addEventListener('click', function() {
+                const password = adminPasswordInput.value;
+                
+                if (password === ADMIN_PASSWORD) {
+                    // تسجيل الدخول ناجح
+                    isLoggedIn = true;
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    loginModal.style.display = 'none';
+                    dotsMenu.style.display = 'block';
+                    adminPasswordInput.value = '';
+                    loginError.style.display = 'none';
+                    
+                    // إغلاق القائمة المنبثقة
+                    adminMenu.style.display = 'none';
+                    
+                    // إظهار قسم لوحة التحكم
+                    adminSection.style.display = 'block';
+                    
+                    // التمرير إلى قسم لوحة التحكم
+                    setTimeout(function() {
+                        adminSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                    
+                    // عرض رسالة ترحيب
+                    alert('مرحباً بك في لوحة التحكم! يمكنك الآن تعديل معلومات التطبيق.');
+                } else {
+                    // كلمة مرور خاطئة
+                    loginError.style.display = 'block';
+                    adminPasswordInput.value = '';
+                }
+            });
+            
+            // إغلاق نافذة التسجيل عند النقر خارجها
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                    adminPasswordInput.value = '';
+                    loginError.style.display = 'none';
+                }
+            });
+            
+            // معالج حدث عنصر "تعديل التطبيق"
+            editAppItem.addEventListener('click', function() {
+                adminSection.style.display = 'block';
+                adminMenu.style.display = 'none';
+                
+                // التمرير إلى قسم لوحة التحكم
+                setTimeout(function() {
+                    adminSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            });
+            
+            // معالج حدث عنصر "إحصائيات التحميل"
+            viewStatsItem.addEventListener('click', function() {
+                adminMenu.style.display = 'none';
+                alert(`إحصائيات التحميل:\nعدد مرات التحميل: ${downloadCount}\nآخر تحميل: ${localStorage.getItem('lastDownload') || 'لا توجد بيانات'}`);
+            });
+            
+            // معالج حدث زر إغلاق لوحة التحكم
+            closeAdminBtn.addEventListener('click', function() {
+                adminSection.style.display = 'none';
+            });
+            
+            // معالج حدث عنصر "تسجيل الخروج"
+            logoutItem.addEventListener('click', function() {
+                isLoggedIn = false;
+                localStorage.setItem('adminLoggedIn', 'false');
+                adminSection.style.display = 'none';
+                adminMenu.style.display = 'none';
+                alert('تم تسجيل الخروج بنجاح');
+            });
+            
+            // معالج حدث زر التحديث
+            updateBtn.addEventListener('click', function() {
+                if (!isLoggedIn) {
+                    alert('يجب تسجيل الدخول أولاً');
+                    return;
+                }
+                
+                // تحديث المعلومات في الصفحة
+                appNameElement.textContent = appNameInput.value;
+                appTaglineElement.textContent = appTaglineInput.value;
+                appDescriptionElement.textContent = appDescriptionInput.value;
+                
+                dynamicAppName.textContent = appNameInput.value;
+                dynamicAppTagline.textContent = appTaglineInput.value;
+                dynamicDescription.textContent = appDescriptionInput.value;
+                
+                // تحديث الأيقونة
+                const iconClass = iconCodeInput.value;
+                dynamicIcon.innerHTML = `<i class="${iconClass}" style="font-size: 30px; color: white;"></i>`;
+                
+                // تحديث رابط التحميل
+                downloadLink.href = appLinkInput.value;
+                
+                // حفظ التعديلات في التخزين المحلي
+                saveAppData();
+                
+                // إظهار رسالة نجاح
+                alert('تم تحديث معلومات التطبيق بنجاح!');
+            });
+            
+            // معالج حدث زر التحميل
+            downloadLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                currentDownloadUrl = downloadLink.href;
+                
+                // التحقق من صحة الرابط
+                if (!currentDownloadUrl || currentDownloadUrl === '#' || currentDownloadUrl.includes('example.com')) {
+                    alert('الرابط غير متوفر حالياً. يرجى المحاولة لاحقاً أو تحديث الرابط من لوحة التحكم.');
+                    return false;
+                }
+                
+                // عرض نافذة التأكيد
+                downloadAlert.style.display = 'block';
+            });
+            
+            // تأكيد التحميل
+            confirmDownloadBtn.addEventListener('click', function() {
+                // زيادة عداد التحميلات
+                downloadCount++;
+                downloadCountElement.textContent = downloadCount;
+                localStorage.setItem('downloadCount', downloadCount);
+                localStorage.setItem('lastDownload', new Date().toLocaleString());
+                
+                // إخفاء نافذة التأكيد
+                downloadAlert.style.display = 'none';
+                
+                // عرض رسالة تحميل
+                const originalText = downloadLink.innerHTML;
+                downloadLink.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span> جاري التحميل...</span>';
+                
+                // فتح رابط التحميل في نافذة جديدة بعد تأخير قصير
+                setTimeout(() => {
+                    downloadLink.innerHTML = originalText;
+                    window.open(currentDownloadUrl, '_blank');
+                    alert('يتم الآن توجيهك إلى صفحة تحميل التطبيق...');
+                }, 1000);
+            });
+            
+            // إلغاء التحميل
+            cancelDownloadBtn.addEventListener('click', function() {
+                downloadAlert.style.display = 'none';
+            });
+            
+            // إغلاق نافذة التأكيد عند النقر خارجها
+            downloadAlert.addEventListener('click', function(e) {
+                if (e.target === downloadAlert) {
+                    downloadAlert.style.display = 'none';
+                }
+            });
+            
+            // دالة لحفظ بيانات التطبيق في التخزين المحلي
+            function saveAppData() {
+                const appData = {
+                    iconCode: iconCodeInput.value,
+                    appName: appNameInput.value,
+                    appTagline: appTaglineInput.value,
+                    appDescription: appDescriptionInput.value,
+                    appLink: appLinkInput.value
+                };
+                
+                localStorage.setItem('appData', JSON.stringify(appData));
+            }
+            
+            // دالة لتحميل بيانات التطبيق من التخزين المحلي
+            function loadAppData() {
+                const savedData = localStorage.getItem('appData');
+                
+                if (savedData) {
+                    const appData = JSON.parse(savedData);
+                    
+                    // تعيين القيم من التخزين المحلي
+                    iconCodeInput.value = appData.iconCode;
+                    appNameInput.value = appData.appName;
+                    appTaglineInput.value = appData.appTagline;
+                    appDescriptionInput.value = appData.appDescription;
+                    appLinkInput.value = appData.appLink;
+                    
+                    // تطبيق القيم على الصفحة
+                    appNameElement.textContent = appData.appName;
+                    appTaglineElement.textContent = appData.appTagline;
+                    appDescriptionElement.textContent = appData.appDescription;
+                    
+                    dynamicAppName.textContent = appData.appName;
+                    dynamicAppTagline.textContent = appData.appTagline;
+                    dynamicDescription.textContent = appData.appDescription;
+                    
+                    // تحديث الأيقونة
+                    dynamicIcon.innerHTML = `<i class="${appData.iconCode}" style="font-size: 30px; color: white;"></i>`;
+                    
+                    // تحديث رابط التحميل
+                    downloadLink.href = appData.appLink;
+                }
+            }
+            
+            // إذا كان المستخدم مسجل دخول بالفعل، إظهار لوحة التحكم
+            if (isLoggedIn) {
+                adminSection.style.display = 'block';
+            }
+            
+            // إعادة تحديد حجم القائمة عند تغيير حجم النافذة
+            window.addEventListener('resize', function() {
+                if (adminMenu.style.display === 'block') {
+                    positionMenu();
+                }
+            });
+            
+            // تهيئة الصفحة
+            initializePage();
+        });
+    </script>
+</body>
+</html>
